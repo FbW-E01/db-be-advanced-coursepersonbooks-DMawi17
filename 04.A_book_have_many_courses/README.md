@@ -10,7 +10,7 @@
 
     -   A user can have many courses
     -   A course can have many users
-    -  
+    -   A course can have many books
     -   A book can have many courses
 
 -   Create a lot of seed data and attempt to make many queries to it, such as:
