@@ -10,11 +10,11 @@ await connect(process.env.MONGODB_URI);
 // schema
 const BookSchema = Schema({
     title: String,
+    courses: [{ type: Schema.Types.ObjectId, ref: "Book" }],
 });
 
 const CourseSchema = Schema({
     title: String,
-    books: [{ type: Schema.Types.ObjectId, ref: "Book" }],
 });
 
 // model
@@ -22,30 +22,30 @@ const Book = model("Book", BookSchema);
 const Course = model("Course", CourseSchema);
 
 // data
-const book1 = await Book.create({
-    title: "MongoDB The Definitive Guide",
+const course1 = await Course.create({
+    title: "MongoDB",
 });
 
-const book2 = await Book.create({
-    title: "Node.js Web Development",
+const course2 = await Course.create({
+    title: "Node.js",
 });
 
-const book3 = await Book.create({
-    title: "MongoDB, Express, Angular, and Node.js Fundamentals",
+const course3 = await Course.create({
+    title: "Express",
 });
 
-const book4 = await Book.create({
-    title: "JavaScript The Definitive Guide",
+const course4 = await Course.create({
+    title: "JavaScript",
 });
 
-const book5 = await Book.create({
-    title: "React Native Cookbook",
+const course5 = await Course.create({
+    title: "React",
 });
 
-const course = await Course.create({
-    title: "Full-Stack Web Development Course",
-    books: [book1._id, book2._id, book3._id, book4._id, book5._id],
+const book = await Book.create({
+    title: "MERN Cook book",
+    courses: [course1._id, course2._id, course3._id, course4._id, course5._id],
 });
 
-const updatedCourse = await Course.findOne().populate("books");
-console.log(updatedCourse);
+const updatedBook = await Book.findOne().populate("courses");
+console.log(updatedBook);
